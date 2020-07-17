@@ -4,12 +4,12 @@
             <directory>.</directory>
         </testsuite>
     </testsuites>
-    <filter>
+    <!--<filter>
         <whitelist>
             <directory>../lib/OurBlog</directory>
         </whitelist>
     </filter>
     <logging>
         <log type="coverage-html" target="report"/>
-    </logging>
+    </logging>-->
 </phpunit>

@@ -65,4 +65,33 @@ class OurBlog_User
             'password' => self::hashPassword($data['password'])
         ));
     }
+    
+    public static function auth(array $data)
+    {
+        // email
+        if (!isset($data['email'])) {
+            throw new InvalidArgumentException('missing required key email');
+        }
+        $len = strlen($data['email']);
+        if ($len < 5 || $len > 200) {
+            throw new InvalidArgumentException('invalid email, length limit 5 ~ 200');
+        }
+        $data['email'] = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
+        if (!$data['email']) {
+            throw new InvalidArgumentException('invalid email');
+        }
+        // password
+        if (!isset($data['password'])) {
+            throw new InvalidArgumentException('missing required key password');
+        }
+        $len = strlen($data['password']);
+        if ($len < 6 || $len > 50) {
+            throw new InvalidArgumentException('invalid password, length limit 6 ~ 50');
+        }
+        
+        return OurBlog_Db::getInstance()->fetchRow(
+            'SELECT id, username FROM user WHERE email = ? AND password = ?',
+            array($data['email'], self::hashPassword($data['password']))
+        );
+    }
 }
