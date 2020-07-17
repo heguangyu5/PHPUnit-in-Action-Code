@@ -62,3 +62,13 @@ table th, table td {
 .posts > a:hover {
     text-decoration: underline;
 }
+
+.post-meta {
+    font-size: .9em;
+    color: #444;
+}
+
+.post-content {
+    white-space: pre-wrap;
+    font-size: .9em;
+}
