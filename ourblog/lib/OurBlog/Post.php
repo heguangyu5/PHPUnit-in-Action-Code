@@ -64,4 +64,33 @@ class OurBlog_Post
             'user_id'     => $this->uid
         ));
     }
+    
+    protected function preparePostId(array $data)
+    {
+        if (!isset($data['id'])) {
+            throw new InvalidArgumentException('missing required key id');
+        }
+        $data['id'] = self::DBAIPK($data['id']);
+        if (!$data['id']) {
+            throw new InvalidArgumentException('invalid id');
+        }
+        if (!OurBlog_Db::getInstance()->fetchOne("SELECT id FROM post WHERE id = {$data['id']} AND user_id = {$this->uid}")) {
+            throw new InvalidArgumentException('id not exists or not your post');
+        }
+
+        return $data;
+    }
+
+    public function edit(array $data)
+    {
+        $data = self::preparePostData($data);
+        $data = self::preparePostId($data);
+
+        OurBlog_Db::getInstance()->update('post', array(
+            'category_id' => $data['categoryId'],
+            'title'       => $data['title'],
+            'content'     => $data['content'],
+            'update_date' => date('Y-m-d H:i:s')
+        ), 'id = ' . $data['id']);
+    }
 }
