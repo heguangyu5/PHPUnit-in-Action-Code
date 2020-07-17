@@ -4,4 +4,12 @@
             <directory>.</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <file>func.php</file>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="report"/>
+    </logging>
 </phpunit>
