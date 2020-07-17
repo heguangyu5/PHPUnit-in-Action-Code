@@ -29,3 +29,26 @@ p {
 .success {
     color: green;
 }
+
+.nav-user {
+    float: right;
+}
+
+.nav-links {
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.nav-links > a {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+table th, table td {
+    border-bottom: 1px solid #eee;
+    padding: 5px;
+}
