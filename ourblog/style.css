@@ -52,3 +52,13 @@ table th, table td {
     border-bottom: 1px solid #eee;
     padding: 5px;
 }
+
+.posts > a {
+    display: block;
+    line-height: 32px;
+    text-decoration: none;
+}
+
+.posts > a:hover {
+    text-decoration: underline;
+}
