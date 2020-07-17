@@ -93,4 +93,11 @@ class OurBlog_Post
             'update_date' => date('Y-m-d H:i:s')
         ), 'id = ' . $data['id']);
     }
+
+    public function delete(array $data)
+    {
+        $data = $this->preparePostId($data);
+        
+        OurBlog_Db::getInstance()->exec("DELETE FROM post WHERE id = {$data['id']}");
+    }
 }
