@@ -7,9 +7,7 @@ $title = 'Admin';
 include __DIR__ . '/header.php';
 
 if (isset($_GET['categoryId'])) {
-    $categoryId = filter_var($_GET['categoryId'], FILTER_VALIDATE_INT, array(
-        'options' => array('min_range' => 1)
-    ));
+    $categoryId = OurBlog_Post::DBAIPK($_GET['categoryId']);
 } else {
     $categoryId = 0;
 }
