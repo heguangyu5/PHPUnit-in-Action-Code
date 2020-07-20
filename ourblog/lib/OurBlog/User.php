@@ -55,15 +55,70 @@ class OurBlog_User
         return md5(self::PASSWORD_SALT . $password);
     }
 
-    public static function reg(array $data)
+    public static function reg(array $data, OurBlog_Util $util)
     {
         $data = self::prepareRegData($data);
         
-        OurBlog_Db::getInstance()->insert('user', array(
-            'email'    => $data['email'],
-            'username' => $data['username'],
-            'password' => self::hashPassword($data['password'])
-        ));
+        $db = OurBlog_Db::getInstance();
+        $db->beginTransaction();
+        try {
+            // user
+            $db->insert('user', array(
+                'email'    => $data['email'],
+                'username' => $data['username'],
+                'password' => self::hashPassword($data['password'])
+            ));
+            // user.reg_token
+            $uid      = $db->lastInsertId();
+            $regToken = $util->generateRegToken($uid);
+            $db->update('user', array(
+                'reg_token' => $regToken
+            ), 'id = ' . $uid);
+            // mail_queue
+            $db->insert('mail_queue', array(
+                'to'      => $data['email'],
+                'subject' => 'OurBlog: Please activate your account',
+                'body'    => "Hello {$data['username']}, Welcome to OurBlog.
+
+Please activate your account by click the link below:
+
+    http://localhost/ourblog/activate.php?id=$uid&token=$regToken
+
+Thanks."
+            ));
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+            throw $e;
+        }
+    }
+    
+    public static function activate(array $data)
+    {
+        // id
+        if (!isset($data['id'])) {
+            throw new InvalidArgumentException('missing required key id');
+        }
+        $id = OurBlog_Post::DBAIPK($data['id']);
+        if (!$id) {
+            throw new InvalidArgumentException('invalid id');
+        }
+        // token
+        if (!isset($data['token'])) {
+            throw new InvalidArgumentException('missing required key token');
+        }
+        $len = strlen($data['token']);
+        if ($len != 32) {
+            throw new InvalidArgumentException('invalid token');
+        }
+        
+        $db = OurBlog_Db::getInstance();
+        if (!$db->fetchOne('SELECT id FROM user WHERE id = ? AND reg_token = ?', array($id, $data['token']))) {
+            throw new InvalidArgumentException('token not exists, have you activated before?');
+        }
+        
+        $updateDate = date('Y-m-d H:i:s');
+        $db->exec("UPDATE user SET reg_token = NULL, update_date = '$updateDate' WHERE id = $id");
     }
     
     public static function auth(array $data)
@@ -89,9 +144,17 @@ class OurBlog_User
             throw new InvalidArgumentException('invalid password, length limit 6 ~ 50');
         }
         
-        return OurBlog_Db::getInstance()->fetchRow(
-            'SELECT id, username FROM user WHERE email = ? AND password = ?',
+        $row = OurBlog_Db::getInstance()->fetchRow(
+            'SELECT id, username, reg_token FROM user WHERE email = ? AND password = ?',
             array($data['email'], self::hashPassword($data['password']))
         );
+        if (!$row) {
+            return false;
+        }
+        if ($row['reg_token']) {
+            throw new InvalidArgumentException('please activate your account first!');
+        }
+        unset($row['reg_token']);
+        return $row;
     }
 }

@@ -37,8 +37,8 @@
 <div class="container">
     <h2>OurBlog Sign In</h2>
     <?php
-        if (isset($_GET['reg']) && $_GET['reg'] == 'success') {
-            echo '<p class="success">reg success!</p>';
+        if (isset($_GET['activate']) && $_GET['activate'] == 'success') {
+            echo '<p class="success">activate success!</p>';
         }
     ?>
     <form method="POST">

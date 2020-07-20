@@ -116,6 +116,17 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
         $this->assertFalse(OurBlog_User::auth($data));
     }
     
+    public function testUnactivatedUser()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('please activate your account first!');
+        
+        OurBlog_User::auth(array(
+            'email'    => 'jim@ourats.com',
+            'password' => '6543210'
+        ));
+    }
+    
     public function testAuth()
     {
         $this->assertEquals(

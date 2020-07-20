@@ -3,8 +3,8 @@
     if ($_POST) {
         include __DIR__ . '/autoload.php';
         try {
-            OurBlog_User::reg($_POST);
-            header('Location: admin/login.php?reg=success');
+            OurBlog_User::reg($_POST, new OurBlog_Util());
+            echo "reg success! we have sent you an activate email, please click the link in the email to activate your account.";
             exit;
         } catch (InvalidArgumentException $e) {
             $error = $e->getMessage();
