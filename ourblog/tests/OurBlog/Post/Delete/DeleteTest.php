@@ -20,7 +20,7 @@ class OurBlog_Post_DeleteTest extends OurBlog_DatabaseTestCase
         $post->delete(array('id' => 2));
     }
     
-    public function testEdit()
+    public function testDelete()
     {
         $post = new OurBlog_Post(1);
         $post->delete(array('id' => 1));
