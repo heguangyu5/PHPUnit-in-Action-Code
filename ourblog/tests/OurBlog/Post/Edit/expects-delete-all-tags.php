@@ -34,15 +34,6 @@ BobParser是从云招OurATS招聘管理系统中独立出来的一个工具，�
         array('id' => '2', 'name' => 'OurATS'),
         array('id' => '3', 'name' => 'https'),
         array('id' => '4', 'name' => 'Moka'),
-        array('id' => '5', 'name' => 'chromium'),
-        array('id' => '6', 'name' => 'SSLKEYLOGFILE'),
-        array('id' => '7', 'name' => 'browser'),
-    ),
-    'post_tag' => array(
-        array('id' => 1, 'post_id' => 1, 'tag_id' => 1),
-        array('id' => 4, 'post_id' => 1, 'tag_id' => 6),
-        array('id' => 5, 'post_id' => 1, 'tag_id' => 7),
-        array('id' => 6, 'post_id' => 1, 'tag_id' => 3),
-        array('id' => 7, 'post_id' => 1, 'tag_id' => 5)
+        array('id' => '5', 'name' => 'chromium')
     )
 );

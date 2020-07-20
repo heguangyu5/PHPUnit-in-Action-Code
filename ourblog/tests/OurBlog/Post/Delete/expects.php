@@ -21,5 +21,12 @@ BobParser是从云招OurATS招聘管理系统中独立出来的一个工具，�
             'create_date' => '2020-07-16 16:10:00',
             'update_date' => '2020-07-16 16:10:00',
         )
+    ),
+    'tag' => array(
+        array('id' => '1', 'name' => 'Wireshark'),
+        array('id' => '2', 'name' => 'OurATS'),
+        array('id' => '3', 'name' => 'https'),
+        array('id' => '4', 'name' => 'Moka'),
+        array('id' => '5', 'name' => 'chromium')
     )
 );

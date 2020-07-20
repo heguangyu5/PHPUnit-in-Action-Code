@@ -41,11 +41,14 @@ include __DIR__ . '/header.php';
     </select>
     <br><br>
     
-    <label>Title:</label><br>
+    Title:<br>
     <input type="text" name="title" style="width:80%">
     <br><br>
-    <label>Content:</label><br>
+    Content:<br>
     <textarea name="content" rows="20" cols="100"></textarea>
+    <br><br>
+    Tags (multiple tags separated by ,):<br>
+    <input type="text" name="tags" style="width: 80%">
     <br><br>
     
     <input type="submit" value="Submit">

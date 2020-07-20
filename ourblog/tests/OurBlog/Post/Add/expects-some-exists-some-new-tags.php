@@ -78,5 +78,19 @@ return array(
 本文展示的是通过浏览器抓取 https 包的办法，后边有时间了再写一篇通过 LD_PRELOAD wrapper libssl.so 来实现抓取任意使用 OpenSSL 实现加密逻辑的网络程序数据包的文章。',
             'user_id'     => 1
         )
+    ),
+    'tag' => array(
+        array('id' => '1', 'name' => 'Wireshark'),
+        array('id' => '2', 'name' => 'OurATS'),
+        array('id' => '3', 'name' => 'https'),
+        array('id' => '4', 'name' => 'Moka'),
+        array('id' => '5', 'name' => 'chromium')
+    ),
+    'post_tag' => array(
+        array('id' => 1, 'post_id' => 1, 'tag_id' => 1),
+        array('id' => 2, 'post_id' => 1, 'tag_id' => 3),
+        array('id' => 3, 'post_id' => 1, 'tag_id' => 4),
+        array('id' => 4, 'post_id' => 1, 'tag_id' => 2),
+        array('id' => 5, 'post_id' => 1, 'tag_id' => 5)
     )
 );

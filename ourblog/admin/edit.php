@@ -59,11 +59,24 @@ include __DIR__ . '/header.php';
     </select>
     <br><br>
     
-    <label>Title:</label><br>
+    Title:<br>
     <input type="text" name="title" style="width:80%" value="<?php echo htmlspecialchars($postRow['title']); ?>">
     <br><br>
-    <label>Content:</label><br>
+    Content:<br>
     <textarea name="content" rows="20" cols="100"><?php echo htmlspecialchars($postRow['content']); ?></textarea>
+    <br><br>
+    <?php
+        $sql = "SELECT  t.name
+                FROM    post_tag pt
+                        INNER JOIN tag t ON pt.tag_id = t.id
+                WHERE
+                        pt.post_id = $id
+                        ORDER BY pt.id";
+        $tags = OurBlog_Db::getInstance()->fetchCol($sql);
+        $tags = implode(',', $tags);
+    ?>
+    Tags (multiple tags separated by ,):<br>
+    <input type="text" name="tags" style="width: 80%" value="<?php echo htmlspecialchars($tags); ?>">
     <br><br>
     
     <input type="submit" value="Save">

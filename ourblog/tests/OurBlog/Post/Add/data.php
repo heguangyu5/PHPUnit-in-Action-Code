@@ -72,5 +72,6 @@ return array(
 
 ## 小结
 
-本文展示的是通过浏览器抓取 https 包的办法，后边有时间了再写一篇通过 LD_PRELOAD wrapper libssl.so 来实现抓取任意使用 OpenSSL 实现加密逻辑的网络程序数据包的文章。'
+本文展示的是通过浏览器抓取 https 包的办法，后边有时间了再写一篇通过 LD_PRELOAD wrapper libssl.so 来实现抓取任意使用 OpenSSL 实现加密逻辑的网络程序数据包的文章。',
+    'tags' => 'Wireshark,https,Moka,OurATS,chromium'
 );

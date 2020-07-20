@@ -20,15 +20,16 @@ class OurBlog_Post_DeleteTest extends OurBlog_DatabaseTestCase
         $post->delete(array('id' => 2));
     }
     
-    public function testEdit()
+    public function testDelete()
     {
         $post = new OurBlog_Post(1);
         $post->delete(array('id' => 1));
         
         $expectedDataSet = $this->createArrayDataSet(include __DIR__ . '/expects.php');
 
-        $dataSet = $this->getConnection()->createDataSet(array('post'));
+        $dataSet = $this->getConnection()->createDataSet(array('post', 'tag'));
 
         $this->assertDataSetsEqual($expectedDataSet, $dataSet);
+        $this->assertTableEmpty('post_tag');
     }
 }
