@@ -25,7 +25,7 @@ try {
     if (!$id) {
         throw new InvalidArgumentException('invalid id');
     }
-    $postRow = OurBlog_Db::getInstance()->fetchRow("SELECT category_id, title, content FROM post WHERE id = $id AND user_id = {$_SESSION['id']}");
+    $postRow = OurBlog_Db::getInstance()->fetchRow("SELECT category_id, title, is_external, content FROM post WHERE id = $id AND user_id = {$_SESSION['id']}");
     if (!$postRow) {
         throw new InvalidArgumentException('id not exists or not your post');
     }
@@ -62,6 +62,8 @@ include __DIR__ . '/header.php';
     Title:<br>
     <input type="text" name="title" style="width:80%" value="<?php echo htmlspecialchars($postRow['title']); ?>">
     <br><br>
+    External Post? <input type="checkbox" name="external" value="1"<?php echo $postRow['is_external'] ? ' checked' : ''; ?>>
+<br><br>
     Content:<br>
     <textarea name="content" rows="20" cols="100"><?php echo htmlspecialchars($postRow['content']); ?></textarea>
     <br><br>

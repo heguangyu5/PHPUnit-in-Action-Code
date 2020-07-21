@@ -206,4 +206,20 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     
         $this->assertDataSetsEqual($expectedDataSet, $filterDataSet);
     }
+    
+    public function testAddExternalPost()
+    {
+        $this->data['external'] = '1';
+        $this->data['content']  = 'https://zhuanlan.zhihu.com/p/157500548';
+        
+        self::$post->add($this->data);
+        
+        $expectedDataSet = $this->createArrayDataSet(include __DIR__ . '/expects-external-post.php');
+    
+        $dataSet = $this->getConnection()->createDataSet(array('post', 'tag', 'post_tag'));
+        $filterDataSet = new PHPUnit_DbUnit_DataSet_FilterDataSet($dataSet);
+        $filterDataSet->setExcludeColumnsForTable('post', array('create_date', 'update_date'));
+    
+        $this->assertDataSetsEqual($expectedDataSet, $filterDataSet);
+    }
 }

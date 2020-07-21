@@ -6,6 +6,7 @@ return array(
             'id'          => 1,
             'category_id' => 5,
             'title'       => '实战 Wireshark https 抓包',
+            'is_external' => 0,
             'content'     => 'Wireshark https SSLKEYLOGFILE chromium-browser',
             'user_id'     => 1,
             'create_date' => '2020-07-16 16:00:00'
@@ -14,6 +15,7 @@ return array(
             'id'          => 2,
             'category_id' => 5,
             'title'       => '推一下我的得意作品：简历解析工具BobParser',
+            'is_external' => 0,
             'content'     => '简历解析是任何与简历有关的软件系统的必备工具。技术上也相对比较成熟。简单搜索一下就能找到数家服务商，有几家直接提供在线试用，可以方便地看到解析效果。
 
 知乎上也有技术人员分享[技术实现思路](https://zhuanlan.zhihu.com/p/51018046)，还有人分享了[研发成本](https://www.zhihu.com/question/266383983/answer/346051885)。这些实现思路大多都涉及[机器学习和NLP](https://www.zhihu.com/question/27134755)，并宣称是“智能”简历解析。

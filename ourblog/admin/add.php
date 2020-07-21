@@ -44,6 +44,8 @@ include __DIR__ . '/header.php';
     Title:<br>
     <input type="text" name="title" style="width:80%">
     <br><br>
+    External Post? <input type="checkbox" name="external" value="1">
+    <br><br>
     Content:<br>
     <textarea name="content" rows="20" cols="100"></textarea>
     <br><br>

@@ -47,8 +47,18 @@ class OurBlog_Post
         }
         // content
         $len = strlen($data['content']);
-        if ($len > 64000) {
-            throw new InvalidArgumentException('content too long, maxlength is 64000 bytes');
+        if (isset($data['external']) && $data['external'] == '1') {
+            if ($len > 1000) {
+                throw new InvalidArgumentException('external url too long');
+            }
+            if (!preg_match('#^https?://[^"]+$#', $data['content'])) {
+                throw new InvalidArgumentException('invalid external url');
+            }
+        } else {
+            if ($len > 64000) {
+                throw new InvalidArgumentException('content too long, maxlength is 64000 bytes');
+            }
+            $data['external'] = 0;
         }
         // tags
         if ($data['tags']) {
@@ -108,6 +118,7 @@ class OurBlog_Post
             $db->insert('post', array(
                 'category_id' => $data['categoryId'],
                 'title'       => $data['title'],
+                'is_external' => $data['external'],
                 'content'     => $data['content'],
                 'user_id'     => $this->uid
             ));
@@ -177,6 +188,7 @@ class OurBlog_Post
             $db->update('post', array(
                 'category_id' => $data['categoryId'],
                 'title'       => $data['title'],
+                'is_external' => $data['external'],
                 'content'     => $data['content'],
                 'update_date' => date('Y-m-d H:i:s')
             ), 'id = ' . $data['id']);

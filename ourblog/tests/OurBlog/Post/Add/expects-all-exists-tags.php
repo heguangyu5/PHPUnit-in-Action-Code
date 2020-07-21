@@ -6,6 +6,7 @@ return array(
             'id'          => 1,
             'category_id' => 1,
             'title'       => '实战 Wireshark https 抓包，抓住 Moka 蹭 OurATS 的小尾巴',
+            'is_external' => 0,
             'content'     => 'Wireshark 号称“纷争终结器 ”，作为开发者，掌握 Wireshark 的基本使用可以快速解决很多技术问题，直接减少很多无意义的“推诿”、“扯皮”。
 
 使用 Wireshark 抓取未加密的网络流量是极其容易的，但随着大家安全意识的提高，加密流量越来越多了。

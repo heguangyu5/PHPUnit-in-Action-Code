@@ -6,6 +6,7 @@ return array(
             'id'          => 1,
             'category_id' => 1,
             'title'       => '实战 Wireshark https 抓包，抓住 Moka 蹭 OurATS 的小尾巴',
+            'is_external' => 0,
             'content'     => 'Wireshark 号称“纷争终结器 ”，作为开发者，掌握 Wireshark 的基本使用可以快速解决很多技术问题，直接减少很多无意义的“推诿”、“扯皮”。
 
 使用 Wireshark 抓取未加密的网络流量是极其容易的，但随着大家安全意识的提高，加密流量越来越多了。
@@ -84,6 +85,7 @@ return array(
             'id'          => 2,
             'category_id' => 5,
             'title'       => '推一下我的得意作品：简历解析工具BobParser',
+            'is_external' => 0,
             'content'     => '简历解析是任何与简历有关的软件系统的必备工具。技术上也相对比较成熟。简单搜索一下就能找到数家服务商，有几家直接提供在线试用，可以方便地看到解析效果。
 
 知乎上也有技术人员分享[技术实现思路](https://zhuanlan.zhihu.com/p/51018046)，还有人分享了[研发成本](https://www.zhihu.com/question/266383983/answer/346051885)。这些实现思路大多都涉及[机器学习和NLP](https://www.zhihu.com/question/27134755)，并宣称是“智能”简历解析。

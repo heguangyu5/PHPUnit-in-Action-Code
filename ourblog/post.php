@@ -11,6 +11,7 @@ try {
         throw new InvalidArgumentException('invalid id');
     }
     $sql = "SELECT  p.title,
+                    p.is_external,
                     p.content,
                     p.create_date,
                     u.username
@@ -21,6 +22,10 @@ try {
     $post = OurBlog_Db::getInstance()->fetchRow($sql);
     if (!$post) {
         throw new InvalidArgumentException('id not exists');
+    }
+    if ($post['is_external']) {
+        header('Location: ' . $post['content']);
+        exit;
     }
 } catch (InvalidArgumentException $e) {
     header('Location: index.php');
