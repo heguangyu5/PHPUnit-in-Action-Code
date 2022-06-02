@@ -26,7 +26,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['email']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key email');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -36,7 +36,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['username']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key username');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -46,7 +46,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['password']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key password');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -56,7 +56,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['confirmPassword']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key confirmPassword');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -66,7 +66,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['email'] = '';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('email required');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -76,7 +76,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['username'] = '';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('username required');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -86,7 +86,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['password'] = '';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('password required');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -96,7 +96,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['confirmPassword'] = '';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('confirmPassword required');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -106,7 +106,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['email'] = 'a@bc';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('email too short, minlength is 5');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -116,7 +116,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['email'] = str_pad('joe@ourats.com', 201, 'a', STR_PAD_LEFT);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('email too long, maxlength is 200');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -139,7 +139,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['email'] = $email;
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid email');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -149,7 +149,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['username'] = 'joe' . str_repeat('何', 28); // mb_strlen = 31
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('username too long, maxlength is 30');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -159,7 +159,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['password'] = '123';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid password, length limit 6 ~ 50');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -169,7 +169,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['password'] = str_pad('123456', 51, 'a');
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid password, length limit 6 ~ 50');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -179,7 +179,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['confirmPassword'] = '123';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('confirmPassword should equal to password');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -189,7 +189,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
     {
         $this->data['email'] = 'bob@ourats.com';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('email already registered');
 
         OurBlog_User::reg($this->data, new OurBlog_Util());
@@ -197,7 +197,7 @@ class OurBlog_User_RegTest extends OurBlog_DatabaseTestCase
 
     public function testReg()
     {
-        $mockedUtil = $this->getMock(OurBlog_Util::class);
+        $mockedUtil = $this->getMock('OurBlog_Util');
         $mockedUtil->expects($this->once())
                    ->method('generateRegToken')
                    ->with($this->equalTo('2'))

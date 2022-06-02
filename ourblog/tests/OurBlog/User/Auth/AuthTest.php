@@ -22,7 +22,7 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['email']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key email');
 
         OurBlog_User::auth($this->data);
@@ -32,7 +32,7 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
     {
         $this->data['email'] = 'a@bc';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid email, length limit 5 ~ 200');
 
         OurBlog_User::auth($this->data);
@@ -42,7 +42,7 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
     {
         $this->data['email'] = str_pad('bob@ourats.com', 201, 'a', STR_PAD_LEFT);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid email, length limit 5 ~ 200');
 
         OurBlog_User::auth($this->data);
@@ -65,7 +65,7 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
     {
         $this->data['email'] = $email;
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid email');
 
         OurBlog_User::auth($this->data);
@@ -75,7 +75,7 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['password']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key password');
 
         OurBlog_User::auth($this->data);
@@ -85,7 +85,7 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
     {
         $this->data['password'] = '12345';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid password, length limit 6 ~ 50');
 
         OurBlog_User::auth($this->data);
@@ -95,7 +95,7 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
     {
         $this->data['password'] = str_pad('123456', 51, 'a');
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid password, length limit 6 ~ 50');
 
         OurBlog_User::auth($this->data);
@@ -120,7 +120,7 @@ class OurBlog_User_AuthTest extends OurBlog_DatabaseTestCase
 
     public function testUnactivatedUser()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('please activate your account first!');
 
         OurBlog_User::auth(array(

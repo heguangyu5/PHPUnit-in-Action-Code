@@ -31,7 +31,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['categoryId']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key categoryId');
 
         self::$post->add($this->data);
@@ -41,7 +41,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['title']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key title');
 
         self::$post->add($this->data);
@@ -51,7 +51,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         unset($this->data['content']);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('missing required key content');
 
         self::$post->add($this->data);
@@ -61,7 +61,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         $this->data['categoryId'] = '';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('categoryId required');
 
         self::$post->add($this->data);
@@ -71,7 +71,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         $this->data['title'] = '';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('title required');
 
         self::$post->add($this->data);
@@ -93,7 +93,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         $this->data['categoryId'] = $categoryId;
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('invalid categoryId');
 
         self::$post->add($this->data);
@@ -106,7 +106,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
             501 - mb_strlen($this->data['title'], 'UTF-8')
         );
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('title too long, maxlength is 500');
 
         self::$post->add($this->data);
@@ -116,7 +116,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         $this->data['content'] = str_pad($this->data['content'], 64001, 'A');
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('content too long, maxlength is 64000 bytes');
 
         self::$post->add($this->data);
@@ -126,7 +126,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         $this->data['tags'] = str_repeat('123456789,', 40) . ',';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('tags too long');
 
         self::$post->add($this->data);
@@ -136,7 +136,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         $this->data['tags'] = 'tag1,tag2,tag3,tag4,tag5,tag6,tag7,tag8,tag9,tag10,tag11';
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('too many tags');
 
         self::$post->add($this->data);
@@ -146,7 +146,7 @@ class OurBlog_Post_AddTest extends OurBlog_DatabaseTestCase
     {
         $this->data['tags'] = str_pad('tag', 31, 'A');
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('tag too long');
 
         self::$post->add($this->data);

@@ -15,7 +15,7 @@ class OurBlog_Post_DeleteTest extends OurBlog_DatabaseTestCase
 
     public function testCannotDeleteOthersPost()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('id not exists or not your post');
 
         $post = new OurBlog_Post(1);

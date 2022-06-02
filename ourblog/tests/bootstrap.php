@@ -1,5 +1,7 @@
 <?php
 
+define('TESTS_ROOT_DIR', getcwd());
+
 // autoload
 if (defined('__BPC__')) {
     spl_autoload_register(function ($class) {

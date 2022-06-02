@@ -15,7 +15,7 @@ class OurBlog_Post_EditTest extends OurBlog_DatabaseTestCase
 
     public function testCannotEditOthersPost()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('id not exists or not your post');
 
         $post = new OurBlog_Post(1);
