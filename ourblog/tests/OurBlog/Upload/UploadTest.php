@@ -4,6 +4,8 @@
  */
 class OurBlog_UploadTest extends PHPUnit_Framework_TestCase
 {
+    public static $classGroups = array('upload');
+
     public function testUpload()
     {
         $_FILES = array(
@@ -19,16 +21,16 @@ class OurBlog_UploadTest extends PHPUnit_Framework_TestCase
         OurBlog_Upload::$unitTest = true;
         mkdir(__DIR__ . '/upload');
         copy(__DIR__ . '/ourats.png', $_FILES['file']['tmp_name']);
-        
+
         $upload   = new OurBlog_Upload(__DIR__ . '/upload', 1);
         $filename = $upload->upload();
-        
+
         $this->assertEquals('1-ourats.png', $filename);
         $this->assertFileEquals(
             __DIR__ . '/upload/1-ourats.png',
             __DIR__ . '/ourats.png'
         );
-        
+
         unlink(__DIR__ . '/upload/1-ourats.png');
         rmdir(__DIR__ . '/upload');
     }

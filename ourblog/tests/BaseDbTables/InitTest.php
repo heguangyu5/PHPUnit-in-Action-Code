@@ -4,6 +4,8 @@
  */
 class OurBlog_BaseDbTables_InitTest extends OurBlog_DatabaseTestCase
 {
+    public static $classGroups = array('BaseDbTablesInit');
+
     public function getDataSet()
     {
         return $this->createArrayDataSet(array(

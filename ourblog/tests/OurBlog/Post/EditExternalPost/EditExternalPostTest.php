@@ -4,13 +4,15 @@
  */
 class OurBlog_Post_EditExternalPostTest extends OurBlog_DatabaseTestCase
 {
+    public static $classGroups = array('post');
+
     public function getDataSet()
     {
         return $this->createArrayDataSet(
             include __DIR__ . '/fixtures.php'
         );
     }
-    
+
     public function testEditAttachTags()
     {
         $post = new OurBlog_Post(1);

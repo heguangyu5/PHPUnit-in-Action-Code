@@ -5,10 +5,10 @@ run_group() {
 }
 
 run_group "Reg,Activate"
-phpunit --group reg,activate
+phpunit-bpc --bootstrap=bootstrap.php --group reg,activate .
 
 run_group "BaseDbTablesInit"
-phpunit --group BaseDbTablesInit
+phpunit-bpc --bootstrap=bootstrap.php --group BaseDbTablesInit .
 
 run_group "Others"
-phpunit --exclude-group reg,activate,BaseDbTablesInit
+phpunit-bpc --bootstrap=bootstrap.php --exclude-group reg,activate,BaseDbTablesInit .

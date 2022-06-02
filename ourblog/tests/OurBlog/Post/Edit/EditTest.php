@@ -4,18 +4,20 @@
  */
 class OurBlog_Post_EditTest extends OurBlog_DatabaseTestCase
 {
+    public static $classGroups = array('post');
+
     public function getDataSet()
     {
         return $this->createArrayDataSet(
             include __DIR__ . '/fixtures.php'
         );
     }
-    
+
     public function testCannotEditOthersPost()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('id not exists or not your post');
-    
+
         $post = new OurBlog_Post(1);
         $post->edit(array(
             'id'         => 2,
@@ -25,7 +27,7 @@ class OurBlog_Post_EditTest extends OurBlog_DatabaseTestCase
             'tags'       => ''
         ));
     }
-    
+
     public function testEditDeleteAllTags()
     {
         $post = new OurBlog_Post(1);
@@ -36,7 +38,7 @@ class OurBlog_Post_EditTest extends OurBlog_DatabaseTestCase
             'content'    => 'Wireshark https SSLKEYLOGFILE chromium-browser',
             'tags'       => ''
         ));
-        
+
         $expectedDataSet = $this->createArrayDataSet(include __DIR__ . '/expects-delete-all-tags.php');
 
         $dataSet = $this->getConnection()->createDataSet(array('post', 'tag'));
@@ -46,7 +48,7 @@ class OurBlog_Post_EditTest extends OurBlog_DatabaseTestCase
         $this->assertDataSetsEqual($expectedDataSet, $filterDataSet);
         $this->assertTableEmpty('post_tag');
     }
-    
+
     public function testEdit()
     {
         $post = new OurBlog_Post(1);
@@ -57,7 +59,7 @@ class OurBlog_Post_EditTest extends OurBlog_DatabaseTestCase
             'content'    => 'Wireshark https SSLKEYLOGFILE chromium-browser',
             'tags'       => 'Wireshark,https,SSLKEYLOGFILE,chromium,browser'
         ));
-        
+
         $expectedDataSet = $this->createArrayDataSet(include __DIR__ . '/expects.php');
 
         $dataSet = $this->getConnection()->createDataSet(array('post', 'tag', 'post_tag'));
@@ -66,7 +68,7 @@ class OurBlog_Post_EditTest extends OurBlog_DatabaseTestCase
 
         $this->assertDataSetsEqual($expectedDataSet, $filterDataSet);
     }
-    
+
     public function testEditAttachTags()
     {
         $post = new OurBlog_Post(2);
