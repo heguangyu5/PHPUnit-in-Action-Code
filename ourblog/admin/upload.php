@@ -6,7 +6,7 @@ include __DIR__ . '/../autoload.php';
 $error = '';
 if ($_FILES) {
     try {
-        $upload = new OurBlog_Upload(__DIR__ . '/../upload', $_SESSION['id']);
+        $upload = new OurBlog_Upload($_SERVER['DOCUMENT_ROOT'] . '/upload', $_SESSION['id']);
         $filename = $upload->upload();
         echo "Upload success! file saved as $filename.";
         exit;
