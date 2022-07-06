@@ -5,10 +5,10 @@ run_group() {
 }
 
 run_group "Reg,Activate"
-phpunit-bpc --bootstrap=bootstrap.php --group reg,activate --save-test-files-path .
+phpunit-bpc --bootstrap=bootstrap.php --group reg,activate --bpc=. .
 
 run_group "BaseDbTablesInit"
-phpunit-bpc --bootstrap=bootstrap.php --group BaseDbTablesInit --save-test-files-path .
+phpunit-bpc --bootstrap=bootstrap.php --group BaseDbTablesInit --bpc=. .
 
 run_group "Others"
-phpunit-bpc --bootstrap=bootstrap.php --exclude-group reg,activate,BaseDbTablesInit --save-test-files-path .
+phpunit-bpc --bootstrap=bootstrap.php --exclude-group reg,activate,BaseDbTablesInit --bpc=. .
